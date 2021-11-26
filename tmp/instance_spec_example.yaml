@@ -1,0 +1,25 @@
+bootDiskSpec:
+  diskSpec:
+    imageId: fd81fjsm21c08qu3b13c
+    size: 21474836480
+    typeId: network-hdd
+description: testing
+folderId: b1gq0rkg62avu3loh7ab
+metadata:
+  serial-port-enable: '1'
+name: test-from-client
+networkInterfaceSpecs:
+- primaryV4AddressSpec:
+    address: ''
+    oneToOneNatSpec:
+      address: ''
+      ipVersion: IPV4
+  subnetId: e9be0thico77frfcd5ut
+platformId: standard-v3
+resourcesSpec:
+  coreFraction: 50
+  cores: 2
+  memory: 2147483648
+schedulingPolicy:
+  preemptible: true
+zoneId: ru-central1-a
