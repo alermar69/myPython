@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SCL>
+    <DataTypeTemplates>
+        <DOType cdc="ENC" id="ENC_Mod">
+            <DA bType="Enum" dchg="true" fc="ST" name="stVal" type="ModKind"/>
+            <DA bType="Quality" fc="ST" name="q" qchg="true"/>
+            <DA bType="Timestamp" fc="ST" name="t"/>
+            <DA bType="Enum" fc="CF" name="ctlModel" type="ctlModel"/>
+        </DOType>
+    </DataTypeTemplates>
+</SCL>

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<zAppointments reminder="15">
+    <appointment>
+        <begin>Thu Jun 07 16:28:00 2007</begin>
+        <uid>040000008200E000</uid>
+        <alarmTime>1181572063</alarmTime>
+        <state />
+        <location />
+        <duration>1800</duration>
+        <subject>Bring pizza home</subject>
+    </appointment>
+    <appointment>
+        <begin>Thu Jun 07 17:06:17 2007</begin>
+        <uid>sdlkjlkadhdakhdfd</uid>
+        <alarmTime>1181588888</alarmTime>
+        <state>TX</state>
+        <location>Dallas</location>
+        <duration>1800</duration>
+        <subject>Bring pizza home</subject>
+    </appointment>
+</zAppointments>
