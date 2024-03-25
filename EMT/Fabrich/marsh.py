@@ -90,15 +90,18 @@ def marsh_all_bm(dfm, bm, ls_id):
 def marsh_all_bm_exclude(ls_marsh_all_bm):
     dfmarsh = pd.read_csv(f'{path_start}marsh_dev.csv')
 
-    ls_free_sv = df_free[df_free['typ'] == 'sv']['name'].tolist()
-    ls_free_rs = df_free[df_free['typ'] == 'rs']['name'].tolist()
+    ls_free_sv = df_free[df_free['typ']=='sv']['name'].tolist()
+    ls_free_rs = df_free[df_free['typ']=='rs']['name'].tolist()
+    ls_free_str = df_free[df_free['typ']=='str']['name'].tolist()
+    ls_free_str_plus = df_free[df_free['typ']=='str_plus']['name'].tolist()
 
     ls_marsh = []
     for lsm in ls_marsh_all_bm:
         ls_marsh1 = []
         for m_id in lsm:
             dfm1 = df_col(dfmarsh, 'marshrut_id', m_id)
-            dfm2 = dfm1[(dfm1['telm'] == 'Светофор') | (dfm1['telm'] == 'РЦ')].iloc[1:]
+            # dfm2 = dfm1[(dfm1['telm'] == 'Светофор') | (dfm1['telm'] == 'РЦ')].iloc[1:]
+            dfm2 = dfm1[(dfm1['pnisp'] != 1)]
             fl = 0
             for index, row in dfm2.iterrows():
                 if row['telm'] == 'Светофор':
@@ -107,6 +110,13 @@ def marsh_all_bm_exclude(ls_marsh_all_bm):
                 if row['telm'] == 'РЦ' and not row['elm'].endswith('ТП'):
                     if row['elm'] not in ls_free_rs:
                         fl = 1
+                if row['telm'] == 'Стрелка':
+                    if row['elm'] not in ls_free_str:
+                        if row['elm'] not in ls_free_str_plus :
+                            fl = 1
+                        else:
+                            if row['pnisp'] == 0:
+                                 fl = 1
             if fl == 0:
                 ls_marsh1.append(m_id)
             else:
@@ -159,8 +169,10 @@ def marsh_elem(dfm, ls_all_marsh, is_txt=True):
 
 def marsh_all_bm_in_elem(dfm, bm):
     ls_all_marsh = marsh_all_bm(dfm, bm, [])
-    ls_all_marsh = marsh_all_bm_exclude(ls_all_marsh)
-    marsh_elem(dfm, ls_all_marsh)
+    to_txt_ls2("marsh_all_bm.txt", ls_all_marsh)
+    to_txt_ls("marsh_is_sel.txt", [])
+    # ls_all_marsh = marsh_all_bm_exclude(ls_all_marsh)
+    # marsh_elem(dfm, ls_all_marsh)
 
 
 # ------------------------------------------------------------------------------------------------------
@@ -198,13 +210,17 @@ def marsh_all_pm(dfm, pm, em, ls_marsh_id):
 def marsh_all_em_in_elem(dfm, em):
     ls_marsh_id = read_txt_ls2("marsh_all_bm.txt")
     ls_marsh_id = marsh_all_em(dfm, em, ls_marsh_id)
-    marsh_elem(dfm, ls_marsh_id)
+    to_txt_ls2("marsh_all_bm.txt", ls_marsh_id)
+    to_txt_ls("marsh_is_sel.txt", [])
+    # marsh_elem(dfm, ls_marsh_id)
 
 
 def marsh_all_pm_in_elem(dfm, pm, em):
     ls_marsh_id = read_txt_ls2("marsh_all_bm.txt")
     ls_marsh_id = marsh_all_pm(dfm, pm, em, ls_marsh_id)
-    marsh_elem(dfm, ls_marsh_id)
+    to_txt_ls2("marsh_all_bm.txt", ls_marsh_id)
+    to_txt_ls("marsh_is_sel.txt", [])
+    # marsh_elem(dfm, ls_marsh_id)
 
 
 # ------------------------------------------------------------------------------------------------------
